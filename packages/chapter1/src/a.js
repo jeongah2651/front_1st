@@ -23,7 +23,8 @@ function Worker (health) {
 }
 
 function JuniorEngineer(health, intelligence) {
-  this._super(health);
+  // this._super(health);
+  Worker.call(this, health); 
   this._intelligence = intelligence ?? 1;
   if (this._intelligence > 10) {
     this._isBornGenius = true;
@@ -35,9 +36,25 @@ function JuniorEngineer(health, intelligence) {
 // TO-DO
 //- 여기에 코드를 작성하세요
 
+Worker.prototype.getHealth = function () {
+  return this._health;
+}
+Worker.prototype.work = function () {
+  return this._health--;
+}
 
-
-
+JuniorEngineer.prototype = Object.create(Worker.prototype);
+JuniorEngineer.prototype.constructor = JuniorEngineer;
+JuniorEngineer.prototype.getIntelligence = function () {
+  return this._intelligence;
+}
+JuniorEngineer.prototype.work = function () {
+  Worker.prototype.work.call(this, 1);
+  this._intelligence++;
+}
+JuniorEngineer.prototype.isBornGenius = function () {
+  return this._isBornGenius ?? false;
+}
 
 
 /**
@@ -69,11 +86,18 @@ function JuniorEngineer(health, intelligence) {
 //     new JuniorEngineer(10, Math.floor(Math.random() * 20)).isBornGenius();
 //   }
 //   var endTime = performance.now();
-  
-//   console.log(endTime - startTime);
+//    console.log(endTime - startTime);
 // }
 
-// main();
+function main() {
+  console.time("performance");
+  for (var i = 0; i < 10000000; i++) {
+    new JuniorEngineer(10, Math.floor(Math.random() * 20)).isBornGenius();
+  }
+  console.timeEnd("performance");
+}
+
+main();
 
 module.exports = {
   Worker,
