@@ -19,12 +19,12 @@ test('구독/발행 자동화 테스트', () => {
   구독(mockFn5);
 
   // 구독을 하면 일단 알림을 받는다.
-  expect(mockFn1).toBeCalledTimes(1); //정확한 호출 횟수
+  expect(mockFn1).toBeCalledTimes(1);
   expect(mockFn2).toBeCalledTimes(1);
   expect(mockFn3).toBeCalledTimes(1);
   expect(mockFn4).toBeCalledTimes(1);
   expect(mockFn5).toBeCalledTimes(1);
-  expect(mockFn1).toReturnWith(`a = 10`); //함수가 지정한 값을 반환하는지 테스트
+  expect(mockFn1).toReturnWith(`a = 10`);
   expect(mockFn2).toReturnWith(`b = 20`);
   expect(mockFn3).toReturnWith(`a + b = 30`);
   expect(mockFn4).toReturnWith(`a * b = 200`);
