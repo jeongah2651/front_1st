@@ -10,7 +10,7 @@ export class Store {
 
     Object.keys(state).forEach(key => {
       Object.defineProperty(this.state, key, {
-        get: () => this.#state[key],
+        get: () => this.#state[key],  
       })
     })
   }
