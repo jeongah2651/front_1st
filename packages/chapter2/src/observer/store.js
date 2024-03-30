@@ -1,7 +1,8 @@
+import { pubsub } from './pubsub.js';
 export class Store {
   #state; #mutations; #actions; 
   state = {};
-  #subscribers = []; // 구독자 목록을 관리할 배열
+
 
   constructor({ state, mutations, actions }) {
     this.#state = state;
@@ -10,13 +11,17 @@ export class Store {
 
     Object.keys(state).forEach(key => {
       Object.defineProperty(this.state, key, {
-        get: () => this.#state[key],  
+        get: () => this.#state[key],
+        set: (newValue) => {
+          this.#state[key] = newValue;
+        }
       })
     })
   }
-  
+
   commit(action, payload) {
      this.#mutations[action](this.#state, payload);
   }
- 
+
 }
+

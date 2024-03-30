@@ -14,7 +14,7 @@ export function createHooks(callback) {
   function resetContext() {
     stateContext.current = 0;
     memoContext.current = 0;
-    stateContext.frameId = {};
+    stateContext.frameId = {};  
   }
 
   const useState = (initState) => {
